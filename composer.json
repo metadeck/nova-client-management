@@ -1,0 +1,64 @@
+{
+    "name": "metadeck/nova-client-manager",
+    "description": "Nova implementation of client manager",
+    "keywords": [
+        "metadeck",
+        "nova-client-manager"
+    ],
+    "homepage": "https://github.com/metadeck/nova-client-manager",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Declan McDonough",
+            "email": "declan@metadeck.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "illuminate/support": "^6.0",
+        "metadeck/client-manager": "^1.0",
+        "laravel/nova": "^2.0",
+        "ebess/advanced-nova-media-library": "^2.9",
+        "advoor/nova-editor-js": "^0.6.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Metadeck\\NovaClientManager\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Metadeck\\NovaClientManager\\Tests\\": "tests"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Metadeck\\NovaClientManager\\NovaClientManagerServiceProvider"
+            ],
+            "aliases": {
+                "NovaClientManager": "Metadeck\\NovaClientManager\\NovaClientManagerFacade"
+            }
+        }
+    }
+}
