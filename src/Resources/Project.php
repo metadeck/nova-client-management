@@ -6,20 +6,23 @@ use Illuminate\Http\Request;
 
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+use Advoor\NovaEditorJs\NovaEditorJs;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 
 use Laravel\Nova\Resource;
-use Metadeck\ClientManager\Models\ClientContact as ClientContactModel;
+use Metadeck\ClientManager\Models\Project as ProjectModel;
 
-class ClientContact extends Resource
+class Project extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = ClientContactModel::class;
+    public static $model = ProjectModel::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -57,16 +60,17 @@ class ClientContact extends Resource
 
             Text::make('Name'),
 
-            Text::make('Email'),
+            TextArea::make('Description'),
 
-            Text::make('Position'),
+            BelongsTo::make('Project Type', 'type', ProjectType::class),
 
             BelongsTo::make('Client', 'client', Client::class),
 
-            Images::make('Image', 'image')
-                ->conversionOnIndexView('thumb')
-                ->croppingConfigs(['ratio' => 1/1])
-                ->rules(['required']),
+            Number::make('Estimated Price'),
+
+            Number::make('Billed Price'),
+
+            Number::make('Actual Cost'),
         ];
     }
 

@@ -5,21 +5,25 @@ namespace Metadeck\NovaClientManager\Resources;
 use Illuminate\Http\Request;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Text;
+use Advoor\NovaEditorJs\NovaEditorJs;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Resource;
-use Metadeck\ClientManager\Models\ClientContact as ClientContactModel;
+use Metadeck\ClientManager\Models\ProjectType as ProjectTypeModel;
 
-class ClientContact extends Resource
+class ProjectType extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = ClientContactModel::class;
+    public static $model = ProjectTypeModel::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -57,16 +61,12 @@ class ClientContact extends Resource
 
             Text::make('Name'),
 
-            Text::make('Email'),
-
-            Text::make('Position'),
+            Textarea::make('Description'),
 
             BelongsTo::make('Client', 'client', Client::class),
 
-            Images::make('Image', 'image')
-                ->conversionOnIndexView('thumb')
-                ->croppingConfigs(['ratio' => 1/1])
-                ->rules(['required']),
+            HasMany::make('Projects', 'projects', Project::class),
+
         ];
     }
 

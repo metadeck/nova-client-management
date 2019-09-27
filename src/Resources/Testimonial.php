@@ -27,7 +27,7 @@ class Testimonial extends Resource
      *
      * @var string
      */
-    public static $title = 'employee_name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -35,7 +35,7 @@ class Testimonial extends Resource
      * @var array
      */
     public static $search = [
-        'employee_name', 'content'
+        'content'
     ];
 
     /**
@@ -56,15 +56,9 @@ class Testimonial extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make('Client', 'client'),
+            BelongsTo::make('Client', 'client', Client::class),
 
-            Images::make('Employee Image', 'employee_image')
-            ->croppingConfigs(['ratio' => 1/1])
-            ->rules(['required']),
-
-            Text::make('Name', 'employee_name'),
-
-            Text::make('Position', 'employee_position'),
+            BelongsTo::make('Client Contact', 'clientContact', ClientContact::class),
 
             Textarea::make('Content', 'content'),
         ];

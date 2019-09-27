@@ -58,7 +58,7 @@ class CaseStudy extends Resource
 
             ID::make()->sortable(),
 
-            BelongsTo::make('Client', 'client', Client::class),
+            BelongsTo::make('Project', 'project', Project::class),
 
             Text::make('Title'),
 

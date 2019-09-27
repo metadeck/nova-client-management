@@ -57,12 +57,14 @@ class Client extends Resource
 
             Text::make('Name'),
 
-            Images::make('Client Logo', 'client_logo')
+            Images::make('Client Logo', 'logo')
                 ->conversionOnIndexView('thumb')
                 ->croppingConfigs(['ratio' => 1/1])
                 ->rules(['required']),
 
-            HasMany::make('Testimonials', 'testimonials', Testimonial::class)
+            HasMany::make('Testimonials', 'testimonials', Testimonial::class),
+
+            HasMany::make('Projects', 'projects', Project::class)
         ];
     }
 

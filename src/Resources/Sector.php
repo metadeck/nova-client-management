@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use Advoor\NovaEditorJs\NovaEditorJs;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Resource;
 use Metadeck\ClientManager\Models\Sector as SectorModel;
 
@@ -58,7 +59,7 @@ class Sector extends Resource
 
             Text::make('Name'),
 
-            NovaEditorJs::make('Description'),
+            Textarea::make('Description'),
 
             Images::make('Icon', 'sector_icon')
                 ->conversionOnIndexView('thumb')
